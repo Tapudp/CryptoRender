@@ -8,3 +8,5 @@ usage of `Ref` and before that we must do `event.preventDefault();` in the `hand
 using `constructor()` method to bind the function itself
 
 completed the `handleChange(event)` function with the values to be console-ed.
+
+# 13 ## Autocomplete component

@@ -16,11 +16,23 @@ class Detail extends React.Component{
    }
 
    componentDidMount(){
+      console.log("component has been mounted");
       const currencyId = this.props.match.params.id;
 
-      this.setState({ loading: true });
+      this.fetchCurrency();      
+   }
 
-      console.log('currencyId', currencyId);
+      componentWillReceiveProps(nextProps) {
+            if(this.props.location.pathname !== nextProps.location.pathname){
+                  // Get new currency id from URL
+                  const newCurrencyId = nextProps.match.params.id;
+                  
+                  this.fetchCurrency(newCurrencyId);
+            }
+      }
+
+      fetchCurrency(currencyId){
+            this.setState({ loading: true })
       fetch(`${API_URL}/cryptocurrencies/${currencyId}`)
          .then(handleResponse)
          .then((currency) => {
@@ -38,7 +50,7 @@ class Detail extends React.Component{
                error: error.errorMessage,
             })
          })
-   }
+      }
 
    render() {
       const { loading, error, currency } = this.state;
